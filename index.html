@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simon-Says</title>
+</head>
+<body>
+
+	<button class="simon-button" id="red"></button>
+	<button class="simon-button" id="green"></button>
+	<button class="simon-button" id="blue"></button>
+	<button class="simon-button" id="yellow"></button>
+
+</body>
+
+<style type="text/css">
+	.simon-button {
+		width: 200px;
+		height: 200px;
+		margin-top: 5%;
+		border-radius: 100%
+
+	}
+
+	.button:active {
+	  	box-shadow: 0 5px #666;
+	  	transform: translateY(4px);
+	}
+
+	.simoned {
+		box-shadow: 0 5px #666;
+	  	transform: translateY(4px);
+	}
+
+	#red {
+		background-color: red;
+	}
+
+	#blue {
+		background-color: blue;
+	}
+
+	#green {
+		background-color: green;
+	}
+
+	#yellow {
+		background-color: yellow;
+	}
+</style>
+
+<script type="text/javascript">
+
+	const simonSelectOptions = document.querySelectorAll(".simon-button");
+	let simonLog = [];
+	let turnNumber = 0;
+
+	function turn(){
+		const nextNumber = newSimonSelection();
+		if(!simonLog.length){
+			simonSelect(simonSelectOptions[nextNumber])
+			simonLog.push(nextNumber)
+		}
+		else {
+			simonLog.map(number => {
+				setTimeout(() => console.log(number), 250)
+			});
+			simonSelect(simonSelectOptions[nextNumber])
+			simonLog.push(nextNumber)
+		}
+		console.log(simonLog);
+	}
+	
+	function simonSelect(ele){
+		ele.classList.add("simoned");
+		setTimeout(() => ele.classList.remove("simoned"), 250)
+		;
+	}
+
+	function newSimonSelection() {
+		return Math.floor((Math.random() * simonSelectOptions.length));
+	}
+	
+
+	// need to be able to use arrow keys (or some other kind of keys) to select colors (indicate with gray outline in circles)
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
