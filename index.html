@@ -10,6 +10,11 @@
 	<button class="simon-button" id="blue"></button>
 	<button class="simon-button" id="yellow"></button>
 
+	<p id="turn-count"></p>
+
+	<button id="reset" onclick="gameReset()">RESET</button>
+	<button id="turn" onclick="turn()">Turn</button>
+
 </body>
 
 <style type="text/css">
@@ -46,6 +51,12 @@
 	#yellow {
 		background-color: yellow;
 	}
+
+	#turn-count {
+		text-align: center;
+	}
+
+
 </style>
 
 <script type="text/javascript">
@@ -53,6 +64,12 @@
 	const simonButtons = document.querySelectorAll(".simon-button");
 	let simonLog = [];
 	let turnNumber = 0;
+	let turnCount = 0;
+
+	function setTurnCount() {
+		const turnCountElement = document.querySelector("#turn-count")
+		turnCountElement.textContent = turnCount;
+	}
 
 	function turn(){
 		const nextNumber = newSimonSelection();
@@ -64,6 +81,8 @@
 			simonLog.push(nextNumber)
 			simonTurn(simonLog);
 		}
+		turnCount++
+		setTurnCount();
 		console.log(simonLog);
 	}
 	
@@ -81,7 +100,7 @@
 		let counter = 0;
 		let i = setInterval(() => {
 			simonSelect(simonButtons[arr[counter]]);
-			
+
 			counter++
 			if(counter === arr.length) {
 				clearInterval(i)
@@ -89,6 +108,14 @@
 		}, 600)
 	}
 	
+	function gameReset(){
+		turnCount = 0;
+		simonLog = [];
+		setTurnCount();
+	}
+
+	//set turn count to 0
+	setTurnCount();
 
 	// need to be able to use arrow keys (or some other kind of keys) to select colors (indicate with gray outline in circles)
 </script>
