@@ -50,22 +50,19 @@
 
 <script type="text/javascript">
 
-	const simonSelectOptions = document.querySelectorAll(".simon-button");
+	const simonButtons = document.querySelectorAll(".simon-button");
 	let simonLog = [];
 	let turnNumber = 0;
 
 	function turn(){
 		const nextNumber = newSimonSelection();
-		if(!simonLog.length){
-			simonSelect(simonSelectOptions[nextNumber])
+		if(simonLog.length === 0){
+			simonSelect(simonButtons[nextNumber])
 			simonLog.push(nextNumber)
 		}
 		else {
-			simonLog.map(number => {
-				setTimeout(() => console.log(number), 250)
-			});
-			simonSelect(simonSelectOptions[nextNumber])
 			simonLog.push(nextNumber)
+			simonTurn(simonLog);
 		}
 		console.log(simonLog);
 	}
@@ -77,7 +74,19 @@
 	}
 
 	function newSimonSelection() {
-		return Math.floor((Math.random() * simonSelectOptions.length));
+		return Math.floor((Math.random() * simonButtons.length));
+	}
+
+	function simonTurn(arr) {
+		let counter = 0;
+		let i = setInterval(() => {
+			simonSelect(simonButtons[arr[counter]]);
+			
+			counter++
+			if(counter === arr.length) {
+				clearInterval(i)
+			}
+		}, 600)
 	}
 	
 
