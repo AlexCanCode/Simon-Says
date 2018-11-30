@@ -107,6 +107,26 @@
 			}
 		}, 600)
 	}
+
+	function playerTurn() {
+		let counter = 0;
+
+		simonButtons.forEach(element => element.addEventListener("click", (e) => console.log(e)));
+
+		//1. Check if player clicked a button
+		//2. Check if that was the right button
+		//3. increment the counter - or computer turn 
+
+		while(counter < simonLog.length){
+
+		}
+		//end player turn 
+
+	}
+
+	function checkButton(int, event) {
+		console.log(simonSelect[simonButtons[int]])
+	}
 	
 	function gameReset(){
 		turnCount = 0;
